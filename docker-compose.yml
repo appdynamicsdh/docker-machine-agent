@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  docker-machine-agent:
+    build: .
+    container_name: docker-machine-agent
+    image: appdynamics/docker-machine-agent
+    environment:
+      - APPD_HOST=vzaspdemo.saas.appdynamics.com
+      - APPD_PORT=443
+      - APPD_ACCOUNT_NAME=vzaspdemo
+      - APPD_ACCESS_KEY=
+      - APPD_SSL_ENABLED=true
+      - APPLICATION_NAME=TEST
+    volumes:
+      - /:/hostroot:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: "host"
+    privileged: true
