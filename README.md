@@ -1,7 +1,12 @@
-## Standalone Machine Agent for Docker Visibility
+## Machine agent + docker instrumentation
 
-The following example shows how to build and run the Standalone Machine Agent in a container with Docker Visibility enabled. This is provided as a guide only, and you may freely modify it to suit your needs.  Docker Container monitoring requires a Server Visibility license and version 4.3.3 or higher of both the Controller and the Standalone Machine Agent.
- 
+This docker image MUST be run in super privledged mode:
+
+1. Firstly docker is installed into the machine agent via Dockerfile.
+1. Once docker is up and running the omniagent script will run which firstly lists all the docker containers.
+1. Injects agent files into all the docker containers running on the underlying hosts
+1. Uses process attach to attach to the JVM.
+1. Starts the network visibility agent.
 
 To build and run this example, you should be running Docker API version 1.27 or higher (to find out your version, run: `docker version`).  This example uses a Ubuntu 14.04 base image and packages the standalone Machine Agent (with bundled JRE) and a simple Bash shell script that starts the Machine Agent with the correct system properties to connect to your Controller: you supply these values as environment variables via the docker-compose.yml file.  
 
